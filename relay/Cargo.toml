@@ -1,0 +1,45 @@
+[package]
+name = "altcords"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+# Single TTS backend: burn/Vulkan (GPU-agnostic, no CUDA/FFI).
+# The inference engine lives in its own repository; it is useful on its own
+# to anyone wanting Qwen3-TTS on a Vulkan GPU, and this app is only one of
+# its callers.
+# The engine is a submodule, pinned to a commit by git rather than resolved
+# by cargo, so a checkout always builds against the engine it was tested
+# with.
+qwen3-tts-burn = { path = "../qwen3-tts-burn" }
+anyhow = "1.0"
+cpal = "0.18"
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+hf-hub = { version = "0.4", default-features = false, features = ["ureq"] }
+eframe = { version = "0.29", default-features = false, features = ["glow", "wayland", "x11"] }
+egui = "0.29"
+raw-window-handle = "0.6"
+
+[target.'cfg(windows)'.dependencies]
+tray-icon = "0.19"
+
+[target.'cfg(windows)'.dependencies.windows]
+version = "0.58"
+features = [
+    "Win32_Foundation",
+    "Win32_Globalization",
+    "Win32_UI_WindowsAndMessaging",
+    "Win32_UI_Input_KeyboardAndMouse",
+    "Win32_System_LibraryLoader",
+    "Win32_System_Threading",
+    "Win32_System_DataExchange",
+    "Win32_System_Memory",
+    "Win32_Graphics_Gdi",
+    "Win32_UI_Controls_Dialogs",
+    "Win32_UI_Shell",
+    "Win32_System_Com",
+]
+
+[target.'cfg(windows)'.build-dependencies]
+winres = "0.1"

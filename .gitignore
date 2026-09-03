@@ -1,0 +1,23 @@
+# Cargo
+/target/
+
+# Build drops / packaged archives (ship via GitHub Releases, not git)
+*.zip
+*.exe
+*.pdb
+*.ilk
+*.exp
+
+# Runtime data if the app is run from a checkout
+/config.json
+/*.log
+/models/
+/refs/
+
+# OS junk
+Thumbs.db
+Desktop.ini
+.DS_Store
+
+# Editors
+.idea/

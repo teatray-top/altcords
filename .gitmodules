@@ -1,0 +1,3 @@
+[submodule "qwen3-tts-burn"]
+	path = qwen3-tts-burn
+	url = https://github.com/teatray-top/qwen3-tts-burn.git

@@ -1,0 +1,21 @@
+[workspace]
+resolver = "2"
+members = ["relay", "qwen3-tts-burn"]
+# A bare `cargo build` builds the app; the engine comes along as its
+# library, without its own examples.
+default-members = ["relay"]
+
+# One release profile for the whole workspace. lto is off on purpose: the runtime
+# bottleneck is GPU per-frame kernel dispatch, not CPU codegen, so LTO buys almost
+# nothing at runtime while roughly doubling build time.
+[profile.release]
+opt-level = 3
+lto = false
+codegen-units = 16
+
+[profile.dev]
+opt-level = 1
+
+[profile.profiling]
+inherits = "release"
+debug = true
