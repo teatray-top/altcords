@@ -21,6 +21,10 @@ driver will do, and there is no CUDA toolkit to install.
 
 ## Build
 
+AltCords is source only. There are no prebuilt executables, installers or
+GitHub Releases, on purpose: you have no reason to trust a binary from a
+stranger. Read the code, then build it yourself.
+
 The inference engine is a git submodule, so clone with it:
 
 ```
@@ -43,7 +47,7 @@ be added from any reference clip; an intonation supplies the delivery and needs
 the clip plus its transcript.
 
 The interface is available in Korean and English, selectable at the top of the
-settings window. The installer's choice applies on first run.
+settings window. The first run follows the Windows display language.
 
 ## Model layout
 
@@ -79,25 +83,6 @@ Korean input is reshaped before synthesis, in the app rather than the engine:
   pronounceable one.
 - Syllables the model cannot say are dropped as you type, with a notice. The
   list is editable in settings.
-
-## Releasing
-
-Version lives in `relay/Cargo.toml` (`package.version`) and is mirrored in
-`CHANGELOG.md`. For a tagged release:
-
-1. Update `CHANGELOG.md` and bump the crate version if needed.
-2. Commit on `master`, then tag annotated: `git tag -a v0.1.0 -m "v0.1.0"`.
-3. Build on Windows after submodules are initialized:
-   `git submodule update --init --recursive && cargo build --release`
-4. Ship the `target/release/altcords.exe` (and any installer you build beside
-   it). Model weights are **not** part of the release archive; they download
-   on first run under their own license terms.
-5. Push the tag (`git push origin v0.1.0`) and create a GitHub Release from it.
-   Attach the zip there — do not commit `*.zip` / `*.exe` into the repo
-   (see `.gitignore`).
-
-There is no CI release pipeline yet; packaging is manual.
-
 
 ## License
 MIT, see [LICENSE](LICENSE). Model weights are licensed separately by their
